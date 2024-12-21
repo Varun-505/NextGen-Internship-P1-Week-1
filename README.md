@@ -4,10 +4,15 @@ The app is designed to allow real-time collaboration for users with seamless UI 
 
 Tech Stack (Frontend)
 React: A JavaScript library for building user interfaces.
+
 Vite: A modern build tool that provides fast development and optimized production builds.
+
 Bootstrap: A popular CSS framework used for building responsive layouts.
+
 Vite React Plugin: Handles fast refresh and optimizations for React apps.
+
 ESLint: For code linting and ensuring code quality.
+
 Getting Started
 To get started with the frontend of this project, follow the steps below.
 
@@ -15,9 +20,9 @@ To get started with the frontend of this project, follow the steps below.
 Clone this repository to your local machine:
 git clone 
 cd real-time-collaboration-app
+
 2. Install dependencies
 After cloning the repository, you need to install the required dependencies for the frontend.
-
 In the client folder, run the following command: 
 npm install
 This will install the necessary packages and dependencies defined in package.json.
@@ -32,7 +37,6 @@ Vite's Hot Module Replacement (HMR) will ensure that changes you make to the cod
 Project Structure (Frontend)
 The frontend structure is organized as follows:
 
-graphql
 ├── src/                       # Source code for the frontend
 │   ├── assets/                 # Static assets used in the app (e.g., images)
 │   ├── components/             # Reusable UI components
