@@ -1,8 +1,10 @@
 Real-Time Collaboration App (Frontend)
+
 This repository contains the frontend of the Real-Time Collaboration App, built with React and Vite. 
 The app is designed to allow real-time collaboration for users with seamless UI and fast interactions.
 
 Tech Stack (Frontend)
+
 React: A JavaScript library for building user interfaces.
 
 Vite: A modern build tool that provides fast development and optimized production builds.
@@ -30,7 +32,7 @@ This will install the necessary packages and dependencies defined in package.jso
 3. Run the development server
 Once the dependencies are installed, start the Vite development server by running:
 npm run dev
-This command will start the React app in development mode and open it in your default web browser at http://localhost:3000.
+This command will start the React app in development mode and open it in your default web browser at http://localhost:5173/
 
 Vite's Hot Module Replacement (HMR) will ensure that changes you make to the code are instantly reflected in the browser without requiring a full page reload.
 
@@ -71,14 +73,6 @@ npm install @vitejs/plugin-react-swc --save-dev
 2. Update Vite Config (optional)
 In your vite.config.js, replace the Babel plugin with the SWC plugin:
 
-javascript
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react-swc'  // SWC plugin for React Fast Refresh
-
-export default defineConfig({
-  plugins: [react()],
-})
-
 3. Restart the development server
 After making changes, restart the development server:
 npm run dev
@@ -103,6 +97,7 @@ Forms: Reusable form components for login, registration, etc.
 Next Steps for the Frontend
 Real-time Collaboration: The next step is to implement real-time collaboration features (e.g., live chat, notifications) using WebSockets or Socket.io.
 User Dashboard: Add user-specific data to the dashboard after successful login.
+
 Troubleshooting
 Error: module not found: If you encounter any missing modules, ensure that all dependencies are installed by running npm install in the client directory.
 
