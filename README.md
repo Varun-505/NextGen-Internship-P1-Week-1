@@ -1,117 +1,140 @@
-Real-Time Collaboration App (Frontend)
+# accepts
 
-This repository contains the frontend of the Real-Time Collaboration App, built with React and Vite. 
-The app is designed to allow real-time collaboration for users with seamless UI and fast interactions.
+[![NPM Version][npm-version-image]][npm-url]
+[![NPM Downloads][npm-downloads-image]][npm-url]
+[![Node.js Version][node-version-image]][node-version-url]
+[![Build Status][github-actions-ci-image]][github-actions-ci-url]
+[![Test Coverage][coveralls-image]][coveralls-url]
 
-Tech Stack (Frontend)
+Higher level content negotiation based on [negotiator](https://www.npmjs.com/package/negotiator).
+Extracted from [koa](https://www.npmjs.com/package/koa) for general use.
 
-React: A JavaScript library for building user interfaces.
+In addition to negotiator, it allows:
 
-Vite: A modern build tool that provides fast development and optimized production builds.
+- Allows types as an array or arguments list, ie `(['text/html', 'application/json'])`
+  as well as `('text/html', 'application/json')`.
+- Allows type shorthands such as `json`.
+- Returns `false` when no types match
+- Treats non-existent headers as `*`
 
-Bootstrap: A popular CSS framework used for building responsive layouts.
+## Installation
 
-Vite React Plugin: Handles fast refresh and optimizations for React apps.
+This is a [Node.js](https://nodejs.org/en/) module available through the
+[npm registry](https://www.npmjs.com/). Installation is done using the
+[`npm install` command](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
 
-ESLint: For code linting and ensuring code quality.
+```sh
+$ npm install accepts
+```
 
-Getting Started
-To get started with the frontend of this project, follow the steps below.
+## API
 
-1. Clone the repository
-Clone this repository to your local machine:
-git clone 
-cd real-time-collaboration-app
+```js
+var accepts = require('accepts')
+```
 
-2. Install dependencies
-After cloning the repository, you need to install the required dependencies for the frontend.
-In the client folder, run the following command: 
-npm install
-This will install the necessary packages and dependencies defined in package.json.
+### accepts(req)
 
-3. Run the development server
-Once the dependencies are installed, start the Vite development server by running:
-npm run dev
-This command will start the React app in development mode and open it in your default web browser at http://localhost:5173/
+Create a new `Accepts` object for the given `req`.
 
-Vite's Hot Module Replacement (HMR) will ensure that changes you make to the code are instantly reflected in the browser without requiring a full page reload.
+#### .charset(charsets)
 
-Project Structure (Frontend)
-The frontend structure is organized as follows:
+Return the first accepted charset. If nothing in `charsets` is accepted,
+then `false` is returned.
 
-├── src/                       # Source code for the frontend
-│   ├── assets/                 # Static assets used in the app (e.g., images)
-│   ├── components/             # Reusable UI components
-│   │   ├── Navbar.jsx          # Navigation bar component
-│   │   ├── Footer.jsx          # Footer component
-│   │   └── LoginForm.jsx       # Login form component
-│   ├── pages/                  # Pages for different routes (Home, Dashboard, Login)
-│   │   ├── Home.jsx            # Home page
-│   │   ├── Dashboard.jsx       # Dashboard page
-│   │   └── Login.jsx           # Login page
-│   ├── App.jsx                 # Main App component (routes, layout)
-│   ├── index.jsx               # Entry point for React app
-│   └── style.css               # Global styles and custom CSS
-│
-├── vite.config.js              # Vite configuration file
-├── package.json                # Dependencies and scripts for the frontend
-└── README.md                   # Project documentation (this file)
+#### .charsets()
 
-Vite + React Setup
-This project uses Vite as the build tool for its fast development server and optimized production builds.
+Return the charsets that the request accepts, in the order of the client's
+preference (most preferred first).
 
-React Fast Refresh
-Vite comes with built-in support for React and enables Fast Refresh out of the box. 
-Fast Refresh ensures that React components preserve their state while the code is hot-reloaded during development.
+#### .encoding(encodings)
 
-Vite uses the @vitejs/plugin-react for this functionality. 
-If you wish to use SWC (Rust-based fast compiler) instead of Babel for React, you can follow these steps:
+Return the first accepted encoding. If nothing in `encodings` is accepted,
+then `false` is returned.
 
-1. Install SWC Plugin (optional)
-If you prefer using SWC for faster builds:
-npm install @vitejs/plugin-react-swc --save-dev
-2. Update Vite Config (optional)
-In your vite.config.js, replace the Babel plugin with the SWC plugin:
+#### .encodings()
 
-3. Restart the development server
-After making changes, restart the development server:
-npm run dev
+Return the encodings that the request accepts, in the order of the client's
+preference (most preferred first).
 
-Frontend Features
+#### .language(languages)
 
-1. Landing Page
-The landing page contains a welcoming message and call-to-action buttons (such as "Login" and "Register").
+Return the first accepted language. If nothing in `languages` is accepted,
+then `false` is returned.
 
-2. Login & Registration Forms
-Simple forms to allow users to log in and register. These forms collect the user's email and password for authentication.
+#### .languages()
 
-3. Responsive Layout
-The UI uses Bootstrap to create a responsive design that adapts to different screen sizes. The layout is mobile-friendly, ensuring a smooth user experience across devices.
+Return the languages that the request accepts, in the order of the client's
+preference (most preferred first).
 
-4. Reusable Components
-The project uses React components to maintain a modular structure:
+#### .type(types)
 
-Navbar: A fixed navigation bar for easy navigation between pages.
-Footer: A fixed footer that stays at the bottom of the page.
-Forms: Reusable form components for login, registration, etc.
-Next Steps for the Frontend
-Real-time Collaboration: The next step is to implement real-time collaboration features (e.g., live chat, notifications) using WebSockets or Socket.io.
-User Dashboard: Add user-specific data to the dashboard after successful login.
+Return the first accepted type (and it is returned as the same text as what
+appears in the `types` array). If nothing in `types` is accepted, then `false`
+is returned.
 
-Troubleshooting
-Error: module not found: If you encounter any missing modules, ensure that all dependencies are installed by running npm install in the client directory.
+The `types` array can contain full MIME types or file extensions. Any value
+that is not a full MIME types is passed to `require('mime-types').lookup`.
 
-Vite HMR issues: If hot module replacement is not working properly, restart the development server with npm run dev.
+#### .types()
 
-# React + Vite
+Return the types that the request accepts, in the order of the client's
+preference (most preferred first).
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Examples
 
-Currently, two official plugins are available:
+### Simple type negotiation
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This simple example shows how to use `accepts` to return a different typed
+respond body based on what the client wants to accept. The server lists it's
+preferences in order and will get back the best match between the client and
+server.
 
+```js
+var accepts = require('accepts')
+var http = require('http')
 
-License
-This project is licensed under the MIT License - see the LICENSE file for details.
+function app (req, res) {
+  var accept = accepts(req)
+
+  // the order of this list is significant; should be server preferred order
+  switch (accept.type(['json', 'html'])) {
+    case 'json':
+      res.setHeader('Content-Type', 'application/json')
+      res.write('{"hello":"world!"}')
+      break
+    case 'html':
+      res.setHeader('Content-Type', 'text/html')
+      res.write('<b>hello, world!</b>')
+      break
+    default:
+      // the fallback is text/plain, so no need to specify it above
+      res.setHeader('Content-Type', 'text/plain')
+      res.write('hello, world!')
+      break
+  }
+
+  res.end()
+}
+
+http.createServer(app).listen(3000)
+```
+
+You can test this out with the cURL program:
+```sh
+curl -I -H'Accept: text/html' http://localhost:3000/
+```
+
+## License
+
+[MIT](LICENSE)
+
+[coveralls-image]: https://badgen.net/coveralls/c/github/jshttp/accepts/master
+[coveralls-url]: https://coveralls.io/r/jshttp/accepts?branch=master
+[github-actions-ci-image]: https://badgen.net/github/checks/jshttp/accepts/master?label=ci
+[github-actions-ci-url]: https://github.com/jshttp/accepts/actions/workflows/ci.yml
+[node-version-image]: https://badgen.net/npm/node/accepts
+[node-version-url]: https://nodejs.org/en/download
+[npm-downloads-image]: https://badgen.net/npm/dm/accepts
+[npm-url]: https://npmjs.org/package/accepts
+[npm-version-image]: https://badgen.net/npm/v/accepts
